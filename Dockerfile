@@ -24,6 +24,9 @@ ENV ARKIMEDIR="/opt/arkime"
 ENV CAPTURE="off"
 ENV VIEWER="on"
 
+# Test Name Resolution
+RUN apt-get update 
+
 # Install Arkime
 RUN mkdir -p /data && \
     cd /data && \
@@ -40,6 +43,9 @@ RUN mkdir -p /data && \
 # Clean up
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/* && \
     rm "/data/${ARKIME_DEB_PACKAGE}"
+
+# Add data Dir
+RUN mkdir /data/import
 
 # Add scripts
 ADD /scripts /data/
