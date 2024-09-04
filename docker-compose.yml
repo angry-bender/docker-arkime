@@ -79,6 +79,7 @@ services:
             - type: bind
               source: $PCAP_DIR
               target: /data/pcap
+            - /home/demouser/pcap:/data/import:rslave
         networks:
             - arkime-os
 

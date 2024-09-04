@@ -41,6 +41,9 @@ RUN mkdir -p /data && \
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/* && \
     rm "/data/${ARKIME_DEB_PACKAGE}"
 
+# Make import Dir
+RUN mkdir /data/import
+
 # Add scripts
 ADD /scripts /data/
 RUN chmod 755 /data/*.sh
