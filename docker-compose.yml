@@ -64,6 +64,10 @@ services:
             - $OS_NODE1
             # uncomment and add all OS node container names
             # - $OS_NODE2
+        env_file:
+            - path: ./env/arkime-compose.env
+              # defaults to values defined in Dockerfile
+              required: false
         environment:
             - OS_HOST=$OS_NODE1
             - OS_PORT=9200
@@ -72,9 +76,12 @@ services:
         volumes:
             - arkime_config:/data/config
             - arkime_logs:/data/logs
-            - /home/demouser/pcap:/data/pcap:rslave
+            - type: bind
+              source: $PCAP_DIR
+              target: /data/pcap
         networks:
             - arkime-os
+
 volumes:
     arkime_config:
     arkime_logs:
@@ -82,6 +89,7 @@ volumes:
     os01_data:
     # add a volume foreach OS node container
     # os02_data:
+
 
 networks:
     arkime-os:
